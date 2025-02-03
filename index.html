@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Legendary Postelon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2D3436;
+            --secondary: #636E72;
+            --accent: #FF6B6B;
+            --background: #E8F0FF;
+            --card-bg: #FFFFFF;
+            --hover: #FD79A8;
+            --text-primary: #2D3436;
+            --text-secondary: #636E72;
+            --gradient-start: #FF6B6B;
+            --gradient-end: #FD79A8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .nav {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-link {
+            background-color: var(--background);
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,184,148,0.2);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 300px;
+            margin: 1rem auto;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .about-section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .fun-fact {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,184,148,0.2);
+        }
+
+        .player-container {
+            background: #1A1A1A;
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .player-content {
+            display: flex;
+            gap: 20px;
+            min-height: 500px;
+        }
+
+        .playlist {
+            width: 300px;
+            background: #2A2A2A;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .playlist-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .playlist-item:hover {
+            background: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        .playlist-item.active {
+            background: var(--hover);
+        }
+
+        .video-container {
+            flex: 1;
+            background: #2A2A2A;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            min-height: 400px;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .play-icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-duration {
+            color: #AAAAAA;
+            font-size: 0.9em;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        #home-section {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-link {
+                width: 90%;
+                text-align: center;
+            }
+            
+            .about-section {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .player-content {
+                flex-direction: column;
+            }
+
+            .playlist {
+                width: 100%;
+            }
+        }
+
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--hover);
+        }
+        .video-guide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(45, 52, 54, 0.9) 0%, rgba(99, 110, 114, 0.9) 100%);
+    border-radius: 10px;
+}
+
+.video-guide h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+}
+
+.video-guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.video-guide-step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step-number {
+    background: var(--accent);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.video-container.empty .video-guide {
+    display: flex;
+}
+
+.video-container.empty video {
+    display: none;
+}
+
+.video-guide {
+    display: none;
+}
+.lyrics-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.lyric-text {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s ease;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.lyric-text.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.lyric-text.zoom {
+    transform: scale(2);
+}
+
+@keyframes zoomInOut {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(2);
+    }
+}
+
+.lyric-text.animate {
+    animation: zoomInOut 5s forwards;
+}
+.about-hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .glowing-text {
+            font-size: 3rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,1), 0 0 30px var(--accent); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: white;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .character-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .character-image {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+        }
+
+        .muscle-animation, .sneeze-animation, .mosquito-animation {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .muscle-animation {
+            top: 0;
+            right: -20px;
+        }
+
+        .sneeze-animation {
+            bottom: 0;
+            left: -20px;
+            animation-delay: 1.5s;
+        }
+
+        .mosquito-animation {
+            top: 50%;
+            right: -30px;
+            animation: mosquito 4s linear infinite;
+        }
+
+        @keyframes mosquito {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(90deg); }
+            50% { transform: translate(0, -40px) rotate(180deg); }
+            75% { transform: translate(-20px, -20px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        .personality-traits {
+            margin: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+
+        .traits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .trait-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .trait-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .trait-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .special-features {
+            margin: 3rem 0;
+        }
+
+        .feature-box {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-list li:hover {
+            transform: translateX(10px);
+            background: rgba(255,107,107,0.1);
+            border-radius: 8px;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+
+        .quote-carousel {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .quotes {
+            position: relative;
+            height: 200px;
+            margin: 2rem 0;
+        }
+
+        .quote-bubble {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            opacity: 0;
+            transition: all 0.5s ease;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .quote-bubble.active {
+            opacity: 1;
+        }
+
+        .quote-bubble p {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quote-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .quote-nav button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-nav button:hover {
+            background: var(--hover);
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .character-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .info-item {
+                flex-direction: column;
+            }
+
+            .glowing-text {
+                font-size: 2rem;
+            }
+
+            .trait-card {
+                margin-bottom: 1rem;
+            }
+        }
+        .stories-hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+        }
+
+        .stories-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-item {
+            margin-bottom: 1rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .story-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .story-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .story-header:hover {
+            background: rgba(255,107,107,0.1);
+        }
+
+        .song-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .song-number {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .expand-icon {
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .story-item.active .expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .story-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: rgba(255,107,107,0.05);
+        }
+
+        .story-inner {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .story-details {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .detail-item {
+            background: rgba(255,107,107,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .stories-container {
+                padding: 0 1rem;
+            }
+
+            .song-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+        .stories-hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-emojis {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-emojis span {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s infinite;
+            opacity: 0.5;
+        }
+
+        .floating-emojis span:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-emojis span:nth-child(2) { left: 30%; animation-delay: 1s; }
+        .floating-emojis span:nth-child(3) { left: 50%; animation-delay: 2s; }
+        .floating-emojis span:nth-child(4) { left: 70%; animation-delay: 3s; }
+        .floating-emojis span:nth-child(5) { left: 90%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .fun-quote {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255,107,107,0.1);
+            border-right: 4px solid var(--accent);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .location-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            font-size: 2rem;
+            color: gold;
+            margin: 1rem 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .fan-status, .disagreement-counter, .languages {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                background: rgba(255,107,107,0.1);
+                border-radius: 20px;
+                margin-top: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .story-icon.protest-icon {
+                animation: shake 1s infinite;
+            }
+
+            @keyframes shake {
+                0%, 100% { transform: rotate(0deg); }
+                25% { transform: rotate(-10deg); }
+                75% { transform: rotate(10deg); }
+            }
+
+            .story-icon.global-icon {
+                animation: spin 10s linear infinite;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        </style>
+
+        <style>
+        .stories-hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-emojis {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-emojis span {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s infinite;
+            opacity: 0.5;
+        }
+
+        .floating-emojis span:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-emojis span:nth-child(2) { left: 30%; animation-delay: 1s; }
+        .floating-emojis span:nth-child(3) { left: 50%; animation-delay: 2s; }
+        .floating-emojis span:nth-child(4) { left: 70%; animation-delay: 3s; }
+        .floating-emojis span:nth-child(5) { left: 90%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .fun-quote {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255,107,107,0.1);
+            border-right: 4px solid var(--accent);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .location-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            font-size: 2rem;
+            color: gold;
+            margin: 1rem 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+   
+            .fan-status, .disagreement-counter, .languages {
+                display: inline-block;
+                padding: 0.5rem 1rem;
+                background: rgba(255,107,107,0.1);
+                border-radius: 20px;
+                margin-top: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .story-icon.protest-icon {
+                animation: shake 1s infinite;
+            }
+
+            @keyframes shake {
+                0%, 100% { transform: rotate(0deg); }
+                25% { transform: rotate(-10deg); }
+                75% { transform: rotate(10deg); }
+            }
+
+            .story-icon.global-icon {
+                animation: spin 10s linear infinite;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+   
+        .stories-hero {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-emojis {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-emojis span {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s infinite;
+            opacity: 0.5;
+        }
+
+        .floating-emojis span:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-emojis span:nth-child(2) { left: 30%; animation-delay: 1s; }
+        .floating-emojis span:nth-child(3) { left: 50%; animation-delay: 2s; }
+        .floating-emojis span:nth-child(4) { left: 70%; animation-delay: 3s; }
+        .floating-emojis span:nth-child(5) { left: 90%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(20deg); }
+        }
+
+        .story-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .fun-quote {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255,107,107,0.1);
+            border-right: 4px solid var(--accent);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .location-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0,0,0,0.05);
+            border-radius: 20px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .rating {
+            font-size: 2rem;
+            color: gold;
+            margin: 1rem 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🎵 הפוסטלון האגדי 🎵</h1>
+        <div class="subtitle">האלבום האלמותי</div>
+    </header>
+
+    <nav class="nav">
+        <a href="#home" class="nav-link" data-section="home-section">דף הבית</a>
+        <a href="#songs" class="nav-link" data-section="player-section">האלבום האלמותי</a>
+        <a href="#about" class="nav-link" data-section="about-section">מי זה הפוסטלון?</a>
+        <a href="#stories" class="nav-link" data-section="stories-section">הסיפורים מאחורי השטויות</a>
+    </nav>
+
+    <main class="main-content">
+        <!-- דף הבית -->
+        <section id="home-section" class="section active">
+            <div class="hero-section">
+                <div class="hero-image">
+                    <img src="https://i.ibb.co/NnPQ21P/2025-01-02-145003.png" alt="פוסטלון">
+                </div>
+                <h2>ברוכים הבאים לחגיגה!</h2>
+            </div>
+
+            <div class="about-section">
+                <h3>מה קורה פה?</h3>
+                <p>ברוכים הבאים לאלבום המטורף של פוסטלון! 12 שירים מטורפים שנבחרו בקפידה רבה 
+                   בהשראת הרפתקאותיו המופרעות, התבטאויותיו המחשמלות והשטויות הבלתי נשכחות של האגדה בהתהוות - 
+                   פוסטלון! הפרויקט הזה הוא אוסף של רגעי הזהב הכי משוגעים שלו, מתועדים במילים ובלחנים שישאירו אתכם פעורי פה!</p>
+                
+                <div class="fun-fact">
+                    💡 עובדה מצחיקה: האלבום כולל 12 שירים מטורפים, כי פוסטלון הוא תמיד יותר ממה שחשבתם!
+                </div>
+            </div>
+        </section>
+
+        <!-- נגן השירים -->
+        <section id="player-section" class="section">
+            <div class="player-content">
+                <div class="playlist">
+                    <div class="playlist-item active" data-file="plahirraion">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>פוסטלון לה היריון</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="joinHands">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>בשילוב ידיים</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="kvitkin">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>כפר ויתקין</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="burgerfall">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>הנפילה בבורגריה</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="onestar">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>כוכב אחד</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="bigeyes">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>עיניים גדולות</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="lapid">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>בהשראת הלפיד</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="pdoma">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>פיי דומה</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="pdoma2">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>פיי דומה 2.0</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="golan">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>העם עם הגולן</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="conflict">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>יוצא חוצץ</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                    <div class="playlist-item" data-file="onsestarEng">
+                        <div class="play-icon">▶</div>
+                        <div class="song-info">
+                            <div>כוכב אחד באנגלית</div>
+                            <div class="song-duration">3:45</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="video-container empty">
+                    <video controls width="100%" height="100%">
+                        <source src="" type="video/mp4">
+                        הדפדפן שלך לא תומך בתגית וידאו.
+                    </video>
+                    <div class="lyrics-overlay">
+                        <div class="lyric-text"></div>
+                    </div>
+                    <div class="video-guide">
+                        <h3>🎵 איך לצפות בקליפים? 🎵</h3>
+                        <div class="video-guide-steps">
+                            <div class="video-guide-step">
+                                <span class="step-number">1</span>
+                                <span>בחרו שיר מהרשימה מימין</span>
+                            </div>
+                            <div class="video-guide-step">
+                                <span class="step-number">2</span>
+                                <span>לחצו על כפתור ההפעלה בנגן</span>
+                            </div>
+                            <div class="video-guide-step">
+                                <span class="step-number">3</span>
+                                <span>תהנו מהשיר האלמותי!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about-section" class="section">
+            <div class="about-hero">
+                <div class="hero-title">
+                    <h2 class="glowing-text">מי זה הפוסטלון?</h2>
+                    <div class="hero-subtitle">האיש והאגדה</div>
+                </div>
+            </div>
+        
+            <div class="character-card">
+                <div class="character-image">
+                    <div class="muscle-animation">💪</div>
+                    <img src="https://i.ibb.co/6cXLf9KM/132321.jpg" alt="פוסטלון" class="profile-img">
+                    <div class="sneeze-animation">🤧</div>
+                    <div class="mosquito-animation">🦟</div>
+                </div>
+                
+                <div class="character-info">
+                    <div class="info-item" data-aos="fade-right">
+                        <span class="icon">🌍</span>
+                        <p>נולד וגדל באוזבקיסטן למשפחת פוסטל האצילית</p>
+                    </div>
+                    
+                    <div class="info-item" data-aos="fade-left">
+                        <span class="icon">⚖️</span>
+                        <p>עורך דין מבריק שלפעמים מתבלבל בדיני מס שבח ומאמין שגברים יכולים להיכנס להריון</p>
+                    </div>
+        
+                    <div class="info-item" data-aos="fade-right">
+                        <span class="icon">🤝</span>
+                        <p>מומחה בשילוב ידיים ובהתבוננות באופק במקום לפעול</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="personality-traits">
+                <h3 class="section-title">תכונות ומאפיינים</h3>
+                <div class="traits-grid">
+                    <div class="trait-card">
+                        <span class="trait-icon">🤧</span>
+                        <h4>תמיד מצונן</h4>
+                        <p>ואומר "צ'שש" בכל הזדמנות אפשרית</p>
+                    </div>
+                    <div class="trait-card">
+                        <span class="trait-icon">💪</span>
+                        <h4>מתאמן במכון</h4>
+                        <p>מתגאה בשריר שלו ומקפיד על אימונים יומיומיים</p>
+                    </div>
+                    <div class="trait-card">
+                        <span class="trait-icon">🦟</span>
+                        <h4>פחדים ייחודיים</h4>
+                        <p>חרדה בלתי נשלטת מג'וקים ויתושים</p>
+                    </div>
+                    <div class="trait-card">
+                        <span class="trait-icon">🎵</span>
+                        <h4>חובב מוזיקה</h4>
+                        <p>מעריץ מושבע של אייל גולן</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="special-features">
+                <div class="feature-box">
+                    <h3>הרגלים מיוחדים</h3>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-icon">☕</span>
+                            <p>מומחה בשפיכת משקאות בכל הזדמנות</p>
+                        </li>
+                        <li>
+                            <span class="feature-icon">👀</span>
+                            <p>ידוע בצרות העין המפורסמת שלו</p>
+                        </li>
+                        <li>
+                            <span class="feature-icon">🗣️</span>
+                            <p>תמיד יוצא חוצץ נגד דעת הרוב</p>
+                        </li>
+                        <li>
+                            <span class="feature-icon">💭</span>
+                            <p>בעל דעות ייחודיות ושונות מכולם</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="quote-carousel">
+                <h3>ציטוטים נבחרים</h3>
+                <div class="quotes">
+                    <div class="quote-bubble active">
+                        <p>"גברים יכולים להיכנס ל-היריון"</p>
+                        <span class="signature"> הפוסטלון, לפני תריסר שנים</span>
+                    </div>
+                    <div class="quote-bubble">
+                        <p>"אתה בא LE מכון?"</p>
+                        <span class="signature"> אוהב את המכון</span>
+                    </div>
+                    <div class="quote-bubble">
+                        <p>"ג'וקים יתושיםםם לכל מקום באו"</p>
+                        <span class="signature"> הפוסטלון, ראה ג'וק</span>
+                    </div>
+                </div>
+                <div class="quote-nav">
+                    <button class="prev">←</button>
+                    <button class="next">→</button>
+                </div>
+            </div>
+        </section>
+        <section id="stories-section" class="section">
+            <div class="stories-hero">
+                <h2 class="glowing-text">הסיפורים מאחורי השטויות</h2>
+                <p class="hero-description">גלו את הסיפורים המטורפים שהפכו לשירים אלמותיים</p>
+                <div class="floating-emojis">
+                    <span>🤰</span>
+                    <span>🦟</span>
+                    <span>💪</span>
+                    <span>🤧</span>
+                    <span>⭐</span>
+                </div>
+            </div>
+        
+            <div class="stories-container">
+                <!-- שיר 1 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">01</span>
+                            <h3>פוסטלון לה היריון</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon pregnancy-icon">🤰</div>
+                            <p>הכל התחיל כשפוסטלון, טען בלהט שגברים יכולים להיכנס להיריון. למרות הניסיונות של חבריו להסביר לו את טעותו, הוא נשאר איתן בדעתו. השיר הזה מנציח את אותו רגע בלתי נשכח.</p>
+                            <div class="fun-quote">"אני אומר לכם, זה אפשרי!" - פוסטלון, 2015</div>
+                            <div class="disagreement-counter">🏆 תואר: יועץ שינויי מין, בנגקוק, תאילנד</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 2 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">02</span>
+                            <h3>בשילוב ידיים</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon hands-icon">🤝</div>
+                            <p>שיר המבוסס על הרגלו המפורסם של פוסטלון לשלב ידיים ולהביט אל האופק במקום לפעול. בכל פעם שהוצגה בפניו הזדמנות רומנטית, זו הייתה תגובתו הקלאסית.</p>
+                            <div class="fun-quote">"אני אשב פה ואביט באופק..." - פוסטלון, בכל הזדמנות</div>
+                            <div class="disagreement-counter">🏅 סטטוס: מאסטר בשילוב ידיים מקצועי</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 3 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">03</span>
+                            <h3>כפר ויתקין</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon village-icon">🏡</div>
+                            <p>טיול שישי תמים הפך לאהבה ממבט ראשון! פוסטלון גילה את כפר ויתקין והחליט מיד שזה המקום בשבילו. למרות אהבתו העזה לחדרה, הוא היה מוכן לזנוח הכל למען החלום הוויתקיני. כמובן שגם פה, כמו בכל דבר בחייו של פוסטלון, הוא התהפך מהרעיון...</p>
+                            <div class="location-tag">📍 כפר ויתקין → חדרה</div>
+                            <div class="disagreement-counter">🥩 רמת התהפכות: סטייק אנטריקוט</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 4 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">04</span>
+                            <h3>הנפילה בבורגריה</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon burger-icon">🍔</div>
+                            <p>היום הראשון בתאילנד, עייפים וסחוטים, פוסטלון ישב בבורגר קינג על כיסא בר. מה שקרה אחר כך נכנס להיסטוריה - הוא פשוט נרדם ונפל! כן, ככה זה כשמשלבים עייפות עם המבורגר...</p>
+                            <div class="location-tag">📍 בורגר קינג, תאילנד</div>
+                            <div class="fun-quote">"דמעות של בכי!" - חברים של פוסטלון, רגע לפני הנפילה</div>
+                            <div class="disagreement-counter">🍔 הישג: נופל מקצועי בינלאומי</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 5 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">05</span>
+                            <h3>כוכב אחד</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon star-icon">⭐</div>
+                            <p>השיר האלמותי המתאר את משרד עורכי הדין דגני ושות', מקום עבודתו של פוסטלון. המשרד, שזכה לכוכב אחד מתוך חמישה בגוגל, הפך לסמל של... ובכן, משהו. אבל פוסטלון לא מתבייש!</p>
+                            <div class="rating">★☆☆☆☆</div>
+                            <div class="fun-quote">"לפחות יש לנו כוכב!" - פוסטלון, מנסה להיות אופטימי</div>
+                            <div class="disagreement-counter">⭐ דירוג משרד: כוכב אחד בשירות</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 6 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">06</span>
+                            <h3>עיניים גדולות</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon eyes-icon">👀</div>
+                            <p>שיר הקנאה הגדול! פוסטלון וצרות העין המפורסמת שלו. תמיד רוצה מה שלאחרים יש, אף פעם לא שמח בשמחת חברים. הוא פשוט לא יכול להתאפק מלקנא!</p>
+                            <div class="fun-quote">"למה לכולם יש ולי אין?" - פוסטלון, בכל הזדמנות אפשרית</div>
+                            <div class="disagreement-counter">👀 תעודת הוקרה: אלוף הקנאה הארצי</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 7 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">07</span>
+                            <h3>בהשראת הלפיד</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon torch-icon">🔦</div>
+                            <p>בימיו בפורמה, פוסטלון מצא את מושא הערצתו - לפידוס! כל צעד שלפידוס עשה, פוסטלון העתיק. כל מילה שלפידוס אמר, פוסטלון שינן. ממש כמו חסיד אחרי הרבי שלו!</p>
+                            <div class="fun-quote">"מה לפידוס אמר על זה?" - פוסטלון, לפני כל החלטה</div>
+                            <div class="disagreement-counter">🔦 דרגה: חסידוס מספר 1 של לפידוס</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 8 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">08</span>
+                            <h3>פיי דומה</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon strong-icon">💪</div>
+                            <p>השיר הקצבי שמתאר את כוחו האדיר של פוסטלון. הוא לא מוותר, הוא חייתי, הוא פשוט פיי דומה!</p>
+                            <div class="fun-quote">"אני חיה! אני חיה!" - פוסטלון, אחרי אימון במכון</div>
+                            <div class="disagreement-counter">🦁 תואר: חיה מוסמכת רמה 1</div>
+                        </div>
+                    </div>
+                </div>
+        
+                
+                <!-- שיר 9 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">09</span>
+                            <h3>פיי דומה 2.0</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon strong-icon">💪💪</div>
+                            <p>הסיקוול המתבקש! כי אי אפשר לעצור את כוחו של פוסטלון, והקהל דרש עוד. גרסה מחודשת ומשופרת של הלהיט המקורי!</p>
+                            <div class="fun-quote">"פי דומה 2 - חזק יותר, מהיר יותר, חייתי יותר!" - פוסטלון, במסיבת ההשקה</div>
+                            <div class="disagreement-counter">🦁🦁 דרגה: חיה מוסמכת רמה 2</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 10 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">10</span>
+                            <h3>העם עם הגולן</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon mic-icon">🎤</div>
+                            <p>כשפרשת אייל גולן חזרה לכותרות, פוסטלון ידע בדיוק באיזה צד הוא נמצא. הפך לחייל מספר אחת בצבא המעריצים, משתף מידע ותומך ללא סייג. אף אחד לא מבין למה, אבל זה פוסטלון - צריך יותר מזה?</p>
+                            <div class="fun-quote">"אייל גולן הוא המלך!" - פוסטלון, בכל הזדמנות אפשרית</div>
+                            <div class="fan-status">🎖️ דרגה: חייל מספר 1 בצבא המעריצים</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 11 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">11</span>
+                            <h3>יוצא חוצץ</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon protest-icon">🗣️</div>
+                            <p>פוסטלון והמיוחדות שלו - תמיד חייב לצאת חוצץ נגד כולם! לא משנה מה הנושא, לא משנה מה הדעה הרווחת - הוא פשוט חייב להתנגד. חבריו כבר התייאשו, אבל הוא ממשיך במסע ההתנגדות שלו.</p>
+                            <div class="fun-quote">"אני לא מסכים איתך, וזה לא משנה מה אמרת!" - פוסטלון, בכל דיון אי פעם</div>
+                            <div class="disagreement-counter">🔄 מונה אי-הסכמות: אינסוף</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- שיר 12 -->
+                <div class="story-item">
+                    <div class="story-header" onclick="toggleStory(this)">
+                        <div class="song-title">
+                            <span class="song-number">12</span>
+                            <h3>כוכב אחד באנגלית</h3>
+                        </div>
+                        <div class="expand-icon">+</div>
+                    </div>
+                    <div class="story-content">
+                        <div class="story-inner">
+                            <div class="story-icon global-icon">🌍</div>
+                            <p>ההצלחה המסחררת של "כוכב אחד" חייבה גרסה בינלאומית! אותו הסיפור, אותה הביקורת, אבל הפעם - באנגלית! כי למה להשאיר את הביקורת של כוכב אחד רק בעברית?</p>
+                            <div class="fun-quote">"One Star, but make it global!" - פוסטלון, בדרך לתהילת עולם</div>
+                            <div class="rating">★☆☆☆☆</div>
+                            <div class="languages">🗣️ Available in: עברית | English</div>
+                        </div>
+                    </div>
+                </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // הגדרת הטקסטים והזמנים עבור כל שיר
+            const songLyrics = {
+                'bigeyes': [
+                    { time: 10, text: "אני נקניק גדול", duration: 5 },
+                    { time: 20, text: "עיניים גדולות!", duration: 5 }
+                ],
+                'pdoma': [
+                    { time: 7, text: "פיי דומההה", duration: 4 },
+                    { time: 18, text: "איזה טעים!", duration: 3 }
+                ]
+                // אפשר להוסיף הגדרות לשירים נוספים
+            };
+        
+            // הגדרת המשתנים הגלובליים
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+            const videoContainer = document.querySelector('.video-container');
+            const videoPlayer = document.querySelector('.video-container video');
+            const lyricText = document.querySelector('.lyric-text');
+            const playlistItems = document.querySelectorAll('.playlist-item');
+            let currentLyricTimeouts = [];
+        
+            // פונקציות עזר
+            function clearLyricTimeouts() {
+                currentLyricTimeouts.forEach(timeout => clearTimeout(timeout));
+                currentLyricTimeouts = [];
+                lyricText.classList.remove('animate');
+                lyricText.style.display = 'none';
+            }
+        
+            function showLyric(text, duration) {
+                lyricText.textContent = text;
+                lyricText.style.display = 'block';
+                lyricText.classList.add('animate');
+        
+                const timeout = setTimeout(() => {
+                    lyricText.classList.remove('animate');
+                    lyricText.style.display = 'none';
+                }, duration * 1000);
+                
+                currentLyricTimeouts.push(timeout);
+            }
+        
+            // ניווט בין עמודים
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    sections.forEach(section => section.style.display = 'none');
+                    const sectionId = this.getAttribute('data-section');
+                    document.getElementById(sectionId).style.display = 'block';
+                });
+            });
+        
+            // נגן השירים
+            playlistItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    playlistItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+        
+                    clearLyricTimeouts();
+                    
+                    const fileName = this.getAttribute('data-file');
+                    videoPlayer.src = `vid/${fileName}.mp4`;
+                    videoContainer.classList.remove('empty');
+                    videoPlayer.play();
+        
+                    // הגדרת הטקסטים לשיר הנוכחי
+                    if (songLyrics[fileName]) {
+                        songLyrics[fileName].forEach(lyric => {
+                            const timeout = setTimeout(() => {
+                                showLyric(lyric.text, lyric.duration);
+                            }, lyric.time * 1000);
+                            currentLyricTimeouts.push(timeout);
+                        });
+                    }
+                });
+            });
+        
+            // אירועי נגן
+            videoPlayer.addEventListener('ended', () => {
+                clearLyricTimeouts();
+                videoContainer.classList.add('empty');
+            });
+        
+            videoPlayer.addEventListener('error', () => {
+                clearLyricTimeouts();
+                videoContainer.classList.add('empty');
+            });
+        
+            videoPlayer.addEventListener('pause', clearLyricTimeouts);
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const quotes = document.querySelectorAll('.quote-bubble');
+            const prevBtn = document.querySelector('.quote-nav .prev');
+            const nextBtn = document.querySelector('.quote-nav .next');
+            let currentQuote = 0;
+
+            function showQuote(index) {
+                quotes.forEach(quote => quote.classList.remove('active'));
+                quotes[index].classList.add('active');
+            }
+
+            prevBtn.addEventListener('click', () => {
+                currentQuote = (currentQuote - 1 + quotes.length) % quotes.length;
+                showQuote(currentQuote);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentQuote = (currentQuote + 1) % quotes.length;
+                showQuote(currentQuote);
+            });
+
+            // Auto-rotate quotes
+            setInterval(() => {
+                currentQuote = (currentQuote + 1) % quotes.length;
+                showQuote(currentQuote);
+            }, 5000);
+        });
+
+        function toggleStory(header) {
+            const item = header.parentElement;
+            const content = item.querySelector('.story-content');
+            const allItems = document.querySelectorAll('.story-item');
+            
+            // Close all other items
+            allItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.story-content').style.maxHeight = null;
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = null;
+            }
+        }
+        </script>
+</body>
+</html>
